@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:
+  app:
+    build:
+      args:
+        UID: '${UID}'
+        UGROUP: '${UGROUP}'
+      context: ./
+      dockerfile: dev-ops/Dockerfile
+    image: foodics_app
+    container_name: foodics_app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+
+  db:
+    image: mysql:5.7
+    container_name: foodcis_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: foodics
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - foodcis_db:/var/lib/mysql
+
+  nginx:
+    image: nginx:alpine
+    container_name: foodics_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    volumes:
+      - ./:/var/www
+      - ./dev-ops/nginx:/etc/nginx/conf.d
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "8082:80"
+    container_name: foodics_phpmyadmin
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=mysql
+    restart: unless-stopped
+    depends_on:
+      - db
+
+volumes:
+  foodcis_db:
+
