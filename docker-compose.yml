@@ -4,8 +4,8 @@ services:
   app:
     build:
       args:
-        UID: '${UID}'
-        UGROUP: '${UGROUP}'
+        UID: '${UID:-1000}'
+        UGROUP: '${UGROUP:-1000}'
       context: ./
       dockerfile: dev-ops/Dockerfile
     image: foodics_app
@@ -30,7 +30,7 @@ services:
     container_name: foodics_nginx
     restart: unless-stopped
     ports:
-      - "80:80"
+      - "84:80"
     volumes:
       - ./:/var/www
       - ./dev-ops/nginx:/etc/nginx/conf.d
