@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
         ];
 
         foreach ($products as $product) {
-            Product::factory()->create([
+            Product::firstOrCreate([
                 'name' => $product,
             ]);
         }

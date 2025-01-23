@@ -32,7 +32,7 @@ class IngredientSeeder extends Seeder
         ];
 
         foreach ($ingredients as $ingredient) {
-            Ingredient::factory()->create($ingredient);
+            Ingredient::firstOrCreate($ingredient);
         }
     }
 }

@@ -12,9 +12,9 @@ class AdminSeeder extends Seeder
      */
     public function run(): void
     {
-        Admin::factory()->create([
-            'name'  => 'Admin',
-            'email' => 'admin@foodics.com',
-        ]);
+        Admin::firstOrCreate(
+            ['email' => 'admin@foodics.com'],
+            ['name' => 'Admin']
+        );
     }
 }
