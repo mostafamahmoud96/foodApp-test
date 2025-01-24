@@ -4,6 +4,9 @@ ARG UID
 ARG UGROUP
 
 WORKDIR /var/www
+
+COPY .  /var/www/
+
 ENV DEBIAN_FRONTEND noninteractive
 ENV TZ=UTC
 
@@ -25,12 +28,9 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 
 RUN curl -sL https://getcomposer.org/installer | php -- --install-dir /usr/bin --filename composer
 
-RUN groupadd --force -g $UGROUP foodics
+RUN chown -R www-data:www-data /var/www
 
-RUN useradd -ms /bin/bash --no-user-group -g $UGROUP -u $UID foodics
-
-RUN chown -R foodics:www-data /var/www
-
+RUN composer install
 COPY ./dev-ops/start-container /usr/local/bin/start-container
 
 RUN chmod +x /usr/local/bin/start-container
