@@ -1,10 +1,43 @@
 ## Installation
 
--   To start the project's contianers run `docker compose up -d`
-    Then Exec into the container using `docker exec -it foodics-app bash`
-    and run `bash ./dev-ops/start-container`
--   To stop running containers run `docker compose down`
+1. To start the project's containers, run:
 
-*   To run unit testing
-    -   Exec into the container `docker exec -it foodics-app bash`
-    -   Then run `./vendor/bin/pest`
+    ```sh
+    docker compose up -d
+    ```
+
+2. To install composer, run the following command inside the container:
+
+    ```sh
+    docker exec foodics_app composer install
+    ```
+
+3. Copy the example environment file:
+
+    ```sh
+    docker exec foodics_app cp .env.example .env
+    ```
+
+4. To run migrations:
+
+    ```sh
+    docker exec foodics_app php artisan migrate
+    ```
+
+5. To run seeders:
+    ```sh
+    docker exec foodics_app php artisan db:seed
+    ```
+
+## Unit Testing
+
+1. Exec into the container:
+
+    ```sh
+    docker exec -it foodics_app bash
+    ```
+
+2. Then run:
+    ```sh
+    ./vendor/bin/pest
+    ```
