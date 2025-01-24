@@ -6,7 +6,7 @@
     docker compose up -d
     ```
 
-2. To install composer, run the following command inside the container:
+2. To install composer, run the following
 
     ```sh
     docker exec foodics_app composer install
