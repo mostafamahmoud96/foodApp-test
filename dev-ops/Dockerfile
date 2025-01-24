@@ -30,7 +30,6 @@ RUN curl -sL https://getcomposer.org/installer | php -- --install-dir /usr/bin -
 
 RUN chown -R www-data:www-data /var/www
 
-RUN composer install
 COPY ./dev-ops/start-container /usr/local/bin/start-container
 
 RUN chmod +x /usr/local/bin/start-container
