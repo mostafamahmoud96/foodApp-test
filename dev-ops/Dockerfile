@@ -29,7 +29,3 @@ RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd zip
 RUN curl -sL https://getcomposer.org/installer | php -- --install-dir /usr/bin --filename composer
 
 RUN chown -R www-data:www-data /var/www
-
-COPY ./dev-ops/start-container /usr/local/bin/start-container
-
-RUN chmod +x /usr/local/bin/start-container
