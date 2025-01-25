@@ -18,6 +18,13 @@
     docker exec foodics_app cp .env.example .env
     ```
 
+
+4. Generate the application key:
+
+    ```sh
+    docker exec foodics_app php artisan key:generate
+    ```
+
 4. To run migrations:
 
     ```sh
